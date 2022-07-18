@@ -1,4 +1,5 @@
-export const locations = {
+
+module.exports.locations = {
     "kazhakoottam": {
       results: [
         {
@@ -57,7 +58,7 @@ export const locations = {
         },
       ],
     },
-    lulu: {
+    "lulu": {
       results: [
         {
           geometry: {
@@ -67,12 +68,12 @@ export const locations = {
             },
             viewport: {
               northeast: {
-                lat: 	8.5157461,
                 lng: 76.8987208,
+                lat: 	8.5157461,
               },
               southwest: {
-                lat: 	8.5157461,
                 lng: 76.8987208,
+              lat: 	8.5157461,
               },
             },
           },

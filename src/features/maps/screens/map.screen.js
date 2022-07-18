@@ -9,11 +9,13 @@ import { MapCallout } from "../component/map-callout.component";
 
 import { Search } from "../component/map.search.component";
 
+const Map = styled(MapView)`
+  height: 100%;
+  width: 100%;
+`;
 
-var { width, height } = Dimensions.get("window");
 
-
-export const MapsRestaurent = ({ navigation }) => {
+const RestaurantMap = ({ navigation }) => {
   const { location } = useContext(LocationContext);
   const { restaurants = [] } = useContext(RestaurantContext);
 
@@ -27,15 +29,12 @@ export const MapsRestaurent = ({ navigation }) => {
 
     setLatDelta(northeastLat - southwestLat);
   }, [location, viewport]);
- 
 
   return (
     <>
       <Search />
-      <View style={styles.container}>
-      <MapView style = {styles.mapcontainer}
-
-region={{
+      <Map
+        region={{
           latitude: lat,
           longitude: lng,
           latitudeDelta: latDelta,
@@ -54,7 +53,9 @@ region={{
             >
               <MapView.Callout
                 onPress={() =>
-                  navigation.navigate("RestaurantDetail", { restaurant })
+                  navigation.navigate("RestaurantDetail", {
+                    restaurant,
+                  })
                 }
               >
                 <MapCallout restaurant={restaurant} />
@@ -62,18 +63,22 @@ region={{
             </MapView.Marker>
           );
         })}
-      </MapView>
-      </View>
+      </Map>
     </>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-mapcontainer: {
-    flex: 1,
-    width: width,
-    height: height,
-  },
-});
+
+export const MapsRestaurent = () => {
+  const { location } = useContext(LocationContext);
+  if (!location) {
+    return (
+      <Map
+        region={{
+          latitude: 0,
+          longitude: 0,
+        }}
+      />
+    );
+  }
+  return <RestaurantMap />;
+};

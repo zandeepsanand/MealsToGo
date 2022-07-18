@@ -12,6 +12,13 @@ export const AccountBackground = styled.ImageBackground.attrs({
   align-items: center;
   justify-content: center;
 `;
+export const ErrorBackground = styled.ImageBackground.attrs({
+  source: require("../../../../assets/map1.jpg"),
+})`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
 export const AccountCover = styled.View`
   position: absolute;
   width: 100%;
@@ -56,4 +63,11 @@ position:absolute;
 top:80px;
 height:20%;
 padding: ${(props)=>props.theme.space[2]};
+`
+export const MapWrapper=styled(View)`
+width:75%;
+position:absolute;
+top:80px;
+height:35%;
+padding: ${(props)=>props.theme.space[4]};
 `

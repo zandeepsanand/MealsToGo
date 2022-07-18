@@ -4,6 +4,7 @@ import { CardStyleInterpolators } from "@react-navigation/stack";
 import { SettingsScreen } from "../../features/settings/screens/settings.screen";
 import { FavouritesScreen } from "../../features/favourites/favourites.screen";
 import { MapsRestaurent } from "../../features/maps/screens/map.screen";
+import { DummyScreen } from "../../features/maps/screens/dummy.screen";
 const Stack=createNativeStackNavigator();
 export const SettingsNavigator=()=>{
 return(
@@ -22,7 +23,7 @@ return(
         />
          <Stack.Screen
           name="Maps"
-          component={MapsRestaurent}
+          component={DummyScreen}
         />
         </Stack.Navigator>
 )

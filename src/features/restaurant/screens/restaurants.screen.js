@@ -35,13 +35,12 @@ const LoadingContainer = styled.View`
   left: 50%;
 `;
 
-export const RestaurantsScreen = ({navigation}) => {
+export const RestaurantsScreen = ({ navigation }) => {
   const { error: locationError } = useContext(LocationContext);
-  const { restaurants, isLoading } = useContext(RestaurantContext);
-  const  { favourites } = useContext(FavouritesContext);
+  const { isLoading, restaurants, error } = useContext(RestaurantContext);
+  const { favourites } = useContext(FavouritesContext);
   const [isToggled, setIsToggled] = useState(false);
-  const hasError =  !!locationError;
-
+  const hasError = !!error || !!locationError;
   return (
     <SafeArea>
       {isLoading && (

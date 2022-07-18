@@ -1,20 +1,68 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect,useState } from "react";
+import "./ignoreWarnings";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import { ThemeProvider } from "styled-components";
+
+import * as firebase from "firebase/compat";
+
+
+
+
+
+import {
+  useFonts as useOswald,
+  Oswald_400Regular,
+} from "@expo-google-fonts/oswald";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+import { theme } from "./src/infrastructure/theme";
+
+import { RestaurantContextProvider } from "./src/services/restaurant/restaurant.context";
+import { LocationContextProvider } from "./src/services/location/location.context";
+import { AppNavigator } from "./src/infrastructure/navigation/app.navigator";
+import { Navigation } from "./src/infrastructure/navigation";
+import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+import { AuthenticationContext, AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB91QoJB-MomkAvK1Hb_QZDYi690zM1c4E",
+  authDomain: "mealstogo-d198c.firebaseapp.com",
+  projectId: "mealstogo-d198c",
+  storageBucket: "mealstogo-d198c.appspot.com",
+  messagingSenderId: "836091379769",
+  appId: "1:836091379769:web:eafb87ac93cdeadfde8de8",
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
+
+
+export default function App() {
+
+  
+
+  const [OswaldLoaded] = useOswald({
+    Oswald_400Regular,
+  });
+  const [latoLoaded] = useLato({
+    Lato_400Regular,
+  });
+
+  if (!OswaldLoaded || !latoLoaded) {
+    return null;
+  }
+ 
+  return (
+    <ThemeProvider theme={theme}>
+      <AuthenticationContextProvider>
+      
+            <Navigation />
+        
+      </AuthenticationContextProvider>
+    </ThemeProvider>
+  );
+}
